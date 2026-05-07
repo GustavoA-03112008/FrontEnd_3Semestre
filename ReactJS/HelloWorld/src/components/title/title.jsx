@@ -1,7 +1,13 @@
-function title(){
-    return(
-        <h1>My component title</h1>
+function Title({nome, sobrenome, texto}) {
+    return (
+         <h1>
+            {texto}
+            <br />
+            {nome} <br />
+            {sobrenome}
+
+        </h1>
     );
 }
 
-export default title;
+export default Title;
