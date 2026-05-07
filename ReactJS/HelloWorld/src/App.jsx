@@ -1,6 +1,5 @@
 import './App.css';
 import Paragrafo from './components/paragrafo/paragrafo';
-import Title from './components/Title/title';
 function App() {
   return(
     <>

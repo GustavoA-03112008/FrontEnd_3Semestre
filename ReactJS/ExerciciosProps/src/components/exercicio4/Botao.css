@@ -1,0 +1,26 @@
+.verde{
+    background-color: rgb(15, 242, 79);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.amarelo{
+    background-color: yellow;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.roxo{
+    background-color: rgb(98, 0, 255);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 10px;
+    cursor: pointer;
+}
