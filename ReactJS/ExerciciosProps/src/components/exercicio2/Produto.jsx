@@ -1,4 +1,5 @@
-const Produto = ({ nome, preco, descricao }) => {
+// Produto.jsx
+function Produto({ nome, preco, descricao }) {
   return (
     <div>
       <h2>{nome}</h2>
@@ -6,6 +7,6 @@ const Produto = ({ nome, preco, descricao }) => {
       <p>{descricao}</p>
     </div>
   );
-};
+}
 
 export default Produto;

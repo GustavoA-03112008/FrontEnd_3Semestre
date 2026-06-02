@@ -1,19 +1,23 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
+
 import './Jogo.css';
 
 
-const Jogo = ({ nome, plataforma, preco, imagem }) => 
-{
-    return (
-        <div className="card">
-            <img src={imagem} alt={nome} />
-            <h2>{nome}</h2>
-            <p>Plataforma: {plataforma}</p>
-            <p>Preço: R$ {preco.toFixed(2)}</p>
-        </div>
-    );
+function Jogo({ nome, plataforma, preco, imagem }) {
+  return (
+    <div
+      style={{
+        border: "1px solid black",
+        padding: "10px",
+        width: "220px",
+        margin: "10px"
+      }}
+    >
+      <img src={imagem} alt={nome} width="200" />
+      <h2>{nome}</h2>
+      <p>Plataforma: {plataforma}</p>
+      <p>Preço: R$ {preco}</p>
+    </div>
+  );
 }
 
-
-export default Jogo
+export default Jogo;

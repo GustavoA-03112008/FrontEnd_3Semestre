@@ -1,11 +1,16 @@
-import './Card.css';
-
-const card = ({children}) => {
+function Card({ children }) {
   return (
-    <div className="container">
+    <div
+      style={{
+        border: "2px solid gray",
+        padding: "15px",
+        borderRadius: "10px",
+        margin: "10px"
+      }}
+    >
       {children}
     </div>
   );
-};
+}
 
-export default card;
+export default Card;

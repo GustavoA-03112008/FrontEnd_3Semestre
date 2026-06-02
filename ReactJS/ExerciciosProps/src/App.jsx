@@ -1,109 +1,210 @@
 import "./App.css";
 
-// import Saudacao from "./componentes/exercicio01/Saudacao";
-// import Produto from "./componentes/exercicio02/Produto";
-// import Perfil from "./componentes/exercicio03/Perfil";
-// import Botao from "./componentes/exercicio04/Botao";
-// import Filme from "./componentes/exercicio05/Filme";
-// import Aluno from "./componentes/exercicio06/Aluno";
-// import Card from "./componentes/exercicio07/Card";
-// import Contato from "./componentes/exercicio08/Contato";
-// import Jogo from "./componentes/exercicio09/Jogo";
-// import ItemLoja from "./componentes/exercicio10/Loja";
-import"./componentes/exercicio03/Perfil.css"
-import"./componentes/exercicio04/Botao.css"
-import"./componentes/exercicio06/Aluno.css"
-import"./componentes/exercicio07/Card.css"
-import"./componentes/exercicio08/Contato.css"
-import"./componentes/exercicio09/Jogo.css"
-import"./componentes/exercicio10/Loja.css"
-import"./componentes/exercicio11/Pessoa.css"
+// import Saudacao from "./components/exercicio1/Saudacao";
 
-import Pessoa from "./componentes/exercicio02/Produto.jsx";
-const App = () => {
+// import Produto from "./components/exercicio2/Produto";
+
+// import Perfil from "./components/exercicio3/Perfil.jsx";
+// import "./components/exercicio3/Perfil.css";
+
+// import Botao from "./components/exercicio4/Botao";
+// import "./components/exercicio4/Botao.css";
+
+// import Filme from "./components/exercicio5/Filme";
+// import "./components/exercicio5/Filme.css";
+
+// import Aluno from "./components/exercicio6/Aluno";
+// import "./components/exercicio6/Aluno.css";
+
+// import Card from "./components/exercicio7/Card";
+// import "./components/exercicio7/Card.css";
+
+// import Contato from "./components/exercicio8/Contato";
+// import "./components/exercicio8/Contato.css";
+
+// import Jogo from "./components/exercicio9/Jogo";
+// import "./components/exercicio9/Jogo.css";
+
+// import ItemLoja from "./components/exercicio10/Loja";
+// import "./components/exercicio10/Loja.css";
+
+
+import Pessoa from "./components/desafio/Pessoa";
+import "./components/desafio/Pessoa.css";
+
+
+function App() {
+
+
+
+
   const pessoas = [
     {
       id: 1,
-      nome: "Maria Silva",
-      idade: 28,
-      cidade: "São Paulo",
-      foto: "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+      nome: "Gustavo",
+      idade: 17,
+      cidade: "Santo André",
+      foto: "https://tse1.mm.bing.net/th/id/OIP.1_lefKGgSO-dNxEH575AwAHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
     },
+
     {
       id: 2,
-      nome: "João Santos",
-      idade: 35,
-      cidade: "Rio de Janeiro",
-      foto: "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+      nome: "Leticia",
+      idade: 14,
+      cidade: "São Paulo",
+      foto: "https://tse1.mm.bing.net/th/id/OIP.1_lefKGgSO-dNxEH575AwAHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
     },
+
     {
       id: 3,
-      nome: "Ana Oliveira",
-      idade: 22,
-      cidade: "Belo Horizonte",
-      foto: "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+      nome: "Felipe",
+      idade: 18,
+      cidade: "Rio de Janeiro",
+      foto: "https://tse1.mm.bing.net/th/id/OIP.1_lefKGgSO-dNxEH575AwAHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
     }
   ];
 
+
   return (
-    <>
-      {/* <Saudacao nome="Eduardo" />
+
+
+
+
+    
+    <div>
+
+
+
+      
+
+      {/* EXERCÍCIO 01
+      <Saudacao nome="Gustavo" />
       <Saudacao nome="Maria" />
-      <Saudacao nome="Lucas" /> */}
+      <Saudacao nome="João" />
 
-      {/* <Produto
-        nome="Geladeira"
-        preco={2500}
-        descricao="Geladeira frost free de 400 litros"
+     */}
+      
+      {/* EXERCÍCIO 02
+
+      <Produto
+        nome="Notebook"
+        preco="3500"
+        descricao="Notebook gamer"
+      />
+
+      <Produto
+        nome="Mouse"
+        preco="150"
+        descricao="Mouse RGB"
+      />
+
+      <Produto
+        nome="Teclado"
+        preco="250"
+        descricao="Teclado mecânico"
+      />
+
+       */}
+
+      
+      
+      {/* EXERCÍCIO 03
+
+      <Perfil
+        nome="Carlos"
+        idade="30"
+        profissao="Programador"
       /> */}
 
-      {/* <Perfil
-        nome="Maria"
-        idade={30}
-        profissao="Engenheira de Software"
+      
+
+      
+      
+      {/* EXERCÍCIO 04
+
+      <Botao texto="Salvar" cor="blue" />
+      <Botao texto="Excluir" cor="green" />
+      <Botao texto="Editar" cor="orange" /> */}
+
+     
+
+{/*       
+      
+      EXERCÍCIO 05
+
+      <Filme
+        titulo="Vingadores"
+        ano="2019"
+        genero="Ação"
+        nota="9.5"
+      />
+
+      */}
+
+      
+      
+      {/* EXERCÍCIO 06
+
+      <Aluno
+        nome="curtis"
+        curso="Desenvenvolvimento de Sistemas"
+        imagem="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/50_Cent_at_Globen_Stockholm4.jpg/250px-50_Cent_at_Globen_Stockholm4.jpg"
       /> */}
 
-      {/* <Botao texto="Botão" cor="red" /> */}
+     
 
-      {/* <Filme
-        titulo="Madagascar"
-        ano={2005}
-        genero="Animação"
-        nota={8}
-      /> */}
+      
+      
+      {/* EXERCÍCIO 07
 
-      {/* <Aluno
-        nome="João"
-        curso="Engenharia de Software"
-        imagem="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-      /> */}
-
-      {/* <Card>
-        <h2>Conteúdo do Card</h2>
-        <p>Conteúdo dentro do Card</p>
+      <Card>
+        <h2>Conteúdo dentro do Card</h2>
+        <p>Usando children</p>
       </Card> */}
 
-      {/* <Contato
-        nome="Maria"
-        telefone="(11) 98765-4321"
-        email="maria@example.com"
+     
+
+      
+      
+      {/* EXERCÍCIO 08
+
+      <Contato
+        nome="Gustavo"
+        telefone="11 96381-2714"
+        email="gustavo.a.silva54@aluno.senai.br"
       /> */}
 
-      {/* <Jogo
-        nome="Homem Aranha"
-        plataforma="PlayStation 4"
-        preco={199.99}
-        imagem="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+     
+
+      
+      
+      {/* EXERCÍCIO 09
+
+      <Jogo
+        nome="Grand Theft Auto V"
+        plataforma="playstation 5"
+        preco="159,89"
+        imagem="https://upload.wikimedia.org/wikipedia/pt/8/80/Grand_Theft_Auto_V_capa.png"
       /> */}
 
-      {/* <ItemLoja
-        nome="Notebook"
-        preco={3500}
+     
+
+      
+      
+      {/* EXERCÍCIO 10
+
+      <ItemLoja
+        nome="Monitor"
+        preco="900"
         categoria="Eletrônicos"
-        estoque={10}
+        estoque={5}
       /> */}
 
-      <h1>Exercicio 11</h1>
+     
+
+      
+      
+      DESAFIO
 
       {pessoas.map((pessoa) => (
         <Pessoa
@@ -114,8 +215,13 @@ const App = () => {
           foto={pessoa.foto}
         />
       ))}
-    </>
+
+     
+
+  
+
+    </div>
   );
-};
+}
 
 export default App;

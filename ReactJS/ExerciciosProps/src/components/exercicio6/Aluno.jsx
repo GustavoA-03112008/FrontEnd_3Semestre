@@ -1,6 +1,12 @@
-const Aluno = ({nome, curso, imagem}) => {
-    return (
-        <h2>Nome: {nome}</h2>,
-        <p>Curso: {curso}</p>,
-        <img src={imagem} alt={nome} />)
+// Aluno.jsx
+function Aluno({ nome, curso, imagem }) {
+  return (
+    <div>
+      <img src={imagem} alt={nome} width="150" />
+      <h2>{nome}</h2>
+      <p>{curso}</p>
+    </div>
+  );
 }
+
+export default Aluno;
