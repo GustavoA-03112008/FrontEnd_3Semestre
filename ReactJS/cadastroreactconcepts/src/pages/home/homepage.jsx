@@ -1,8 +1,6 @@
 import "./homepage.css"
-
-export default  function HomePage() {
+export default function HomePage() {
     return (
-        <h1>Pagina home</h1>
+        <h1>Página Home</h1>
     )
 }
-

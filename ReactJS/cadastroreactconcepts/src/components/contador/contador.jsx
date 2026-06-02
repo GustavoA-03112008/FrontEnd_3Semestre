@@ -1,24 +1,20 @@
-import { useState } from "react";
-import "./contador.css";
+import { useState } from "react"
+import "./contador.css"
 
 const Contador = () => {
+    const [valor, setValor] = useState(0)
 
-    const [valor, setValor] = useState(0);
-
-    // função de incremento
     function incremento() {
-        if (valor === 10) {
-            setValor(0);
+        if (valor >= 10) {
+            setValor(0)
         } else {
-            setValor(valor + 1);
+            setValor(valor + 1)
         }
     }
 
-    // função de decremento
     function decremento() {
-        // não deixa ficar negativo
         if (valor > 0) {
-            setValor(valor - 1);
+            setValor(valor - 1)
         }
     }
 
@@ -27,14 +23,13 @@ const Contador = () => {
             <p>Contagem: {valor}</p>
 
             <button onClick={incremento}>
-                ++
+                Aumentar
             </button>
 
             <button onClick={decremento}>
-                --
+                Diminuir
             </button>
         </>
-    );
+    )
 }
-
-export default Contador;
+export default Contador

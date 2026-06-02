@@ -136,3 +136,14 @@ body{
   color: #374151;
   margin-bottom: 5px;
 }
+
+textarea.class-input{
+  height: 42px;
+  resize: none;
+}
+
+#formProduto{
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}

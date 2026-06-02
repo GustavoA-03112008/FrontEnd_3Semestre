@@ -1,6 +1,7 @@
-import "./produtospage.css"
-import { useEffect, useState } from "react"
-
+import axios from "axios";
+import "./produtospage.css";
+import { useEffect, useState } from "react";
+import api from "../../Services/services";
 export const ProdutosPages = () => {
 
   // lista
@@ -9,23 +10,22 @@ export const ProdutosPages = () => {
   // states
   const [titulo, setTitulo] = useState("");
   const [categoria, setCategoria] = useState("");
-  const [preco, setPreco] = useState(0);
-  const [estoque, setEstoque] = useState(0);
-  const [descricao, setDescricao] = useState("");
-  const [imagem, setImagem] = useState("hero.png");
-
-  // edição
-  const [editar, setEditar] = useState(false);
+  const [preco, setPreco] = useState("");
+  const [estoque, setEstoque] = useState("");
+  const [imagem, setImagem] = useState("");
+  const [editar, setEditar] = useState(false)
   const [idProduto, setIdProduto] = useState(null);
-
   //função get dados
   async function getDados() {
 
     try {
 
-      const retornoAPI = await fetch("http://localhost:3000/produtos");
+      //GetDados utilizando axios
+      const retornoAPI = await api.get("/produtos")
+      const dados = await retornoAPI.data;
 
-      const dados = await retornoAPI.json();
+      // const retornoAPI = await fetch("http://localhost:3000/produtos");
+      // const dados = await retornoAPI.json();
 
       setListaProdutos(dados);
 
@@ -35,26 +35,31 @@ export const ProdutosPages = () => {
 
     }
 
+
   }
 
-  // função deletar
+  // função deletar com axios
   async function Deletar(id) {
 
     try {
 
-      const response = await fetch(`http://localhost:3000/produtos/${id}`, {
-        method: "DELETE"
-      });
+      const response = await api.delete(`/produtos/${id}`);
 
       if (response.status === 200) {
-        alert("Produto apagado com sucesso")
-        getDados()
-      } else {
-        alert("Erro ao apagar produto")
+
+        alert("Produto DELETADO com sucesso!!");
+
+        // atualiza a lista
+        getDados();
+
       }
 
     } catch (error) {
+
       console.log(error);
+
+      alert("Erro ao deletar produto");
+
     }
 
   }
@@ -62,24 +67,16 @@ export const ProdutosPages = () => {
   // carregar produtos
   useEffect(() => {
 
+
     getDados();
 
   }, []);
 
-  // limpar formulário
-  function limparFormulario() {
-    setTitulo("");
-    setCategoria("");
-    setPreco(0);
-    setEstoque(0);
-    setDescricao("");
-    setImagem("hero.png");
-  }
-
-  // cadastrar produto
+  // cadastrar produto com axios
   const cadastrar = async (e) => {
 
     e.preventDefault();
+
 
     // validação
     if (
@@ -98,7 +95,6 @@ export const ProdutosPages = () => {
     const novoProduto = {
       titulo,
       categoria,
-      descricao,
       preco,
       estoque,
       imagem
@@ -106,47 +102,61 @@ export const ProdutosPages = () => {
 
     try {
 
-      const resposta = await fetch("http://localhost:3000/produtos", {
+      //parte do axios
+      const resposta = await api.post("/produtos", novoProduto)
 
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify(novoProduto)
-
-      });
-
-      const produtoCadastrado = await resposta.json();
+      const produtoCadastrado = await resposta.data
 
       // adiciona na lista
-      setListaProdutos([
-        ...listaProdutos,
-        produtoCadastrado
-      ]);
+      setListaProdutos([...listaProdutos, produtoCadastrado]);
 
-      limparFormulario();
+      // limpa campos
 
-      alert("Produto cadastrado!");
+
+      alert("Produto CADASTRADO!!");
 
     } catch (error) {
 
       console.log(error);
 
     }
-
+    limparFormulario()
   };
 
-  // editar produto
-  const editarProduto = async (e) => {
+  //Limpar o formulário
+  function limparFormulario() {
+    setIdProduto(null)
+    setTitulo("");
+    setCategoria("");
+    setPreco("");
+    setEstoque("");
+    setImagem("");
+  }
+
+
+  //FUnção Editar
+  const Editar = async (e) => {
 
     e.preventDefault();
 
-    const produtoAtualizado = {
+    // validação
+    if (
+      titulo.trim().length === 0 ||
+      categoria.trim().length === 0 ||
+      preco <= 0 ||
+      estoque <= 0
+    ) {
+
+      alert("Preencha todos os campos corretamente");
+
+      return;
+
+    }
+
+    // objeto atualizado
+    const novoProdutoAT = {
       titulo,
       categoria,
-      descricao,
       preco,
       estoque,
       imagem
@@ -154,33 +164,34 @@ export const ProdutosPages = () => {
 
     try {
 
-      await fetch(`http://localhost:3000/produtos/${idProduto}`, {
+      const resposta = await api.put(`/produtos/${idProduto}`, novoProdutoAT);
 
-        method: "PUT",
+      // AXIOS USA STATUS
+      if (resposta.status === 200) {
 
-        headers: {
-          "Content-Type": "application/json"
-        },
+        alert("Produto EDITADO!!");
 
-        body: JSON.stringify(produtoAtualizado)
+        // atualizar lista
+        getDados();
 
-      });
+        // limpar formulário
+        limparFormulario();
 
-      alert("Produto atualizado!");
+        // sair modo edição
+        setEditar(false);
 
-      getDados();
-
-      limparFormulario();
-
-      setEditar(false);
+      }
 
     } catch (error) {
 
       console.log(error);
 
+      alert("Erro ao editar produto");
+
     }
 
   };
+
 
   return (
     <>
@@ -195,11 +206,9 @@ export const ProdutosPages = () => {
         {/* FORMULÁRIO */}
         <section className="form-section">
 
-          <h2>
-            {editar ? "Editar Produto" : "Cadastrar Produto"}
-          </h2>
+          <h2>Cadastrar Produto</h2>
 
-          <form id="formProduto" onSubmit={editar ? editarProduto : cadastrar}>
+          <form id="formProduto" onSubmit={editar ? Editar : cadastrar}>
 
             <input
               className="class-input"
@@ -221,15 +230,6 @@ export const ProdutosPages = () => {
               }}
               placeholder="Categoria"
               required
-            />
-
-            <textarea
-              className="class-input"
-              value={descricao}
-              onChange={(e) => {
-                setDescricao(e.target.value);
-              }}
-              placeholder="Descrição"
             />
 
             <input
@@ -267,24 +267,29 @@ export const ProdutosPages = () => {
               required
             />
 
-            {editar && (
+            <div className="buttons">
               <button
-                type="button"
-                onClick={() => {
-                  setEditar(false);
-                  limparFormulario();
-                }}
+                type="submit"
+                className="button"
               >
-                Cancelar
+                Salvar
               </button>
-            )}
 
-            <button
-              type="submit"
-              className="button"
-            >
-              Salvar
-            </button>
+              {editar && (
+                <button
+                  type="submit"
+                  className="button-cancel"
+                  onClick={() => {
+                    setEditar(false)
+                    limparFormulario()
+                  }}
+                >
+                  Cancelar
+                </button>
+              )}
+
+
+            </div>
 
           </form>
 
@@ -325,34 +330,42 @@ export const ProdutosPages = () => {
                 </p>
 
                 <p className="estoque">
-                  Estoque: {p.estoque} <strong>X</strong>
+                  Estoque: {p.estoque}
                 </p>
 
-                <a href="" onClick={(e) => {
-                  e.preventDefault()
-                  Deletar(p.id)
-                }}>
-                  Apagar
-                </a>
+                <div className="buttons-card">
 
-                <a href="" onClick={(e) => {
+                  {/*EDITAR*/}
+                  <a
+                    className="edit"
+                    href=""
+                    onClick={(e) => {
 
-                  e.preventDefault();
+                      e.preventDefault();
 
-                  setIdProduto(p.id);
+                      setEditar(true);
 
-                  setTitulo(p.titulo);
-                  setCategoria(p.categoria);
-                  setDescricao(p.descricao);
-                  setPreco(p.preco);
-                  setEstoque(p.estoque);
-                  setImagem(p.imagem);
+                      setIdProduto(p.id);
 
-                  setEditar(true);
+                      setTitulo(p.titulo);
+                      setCategoria(p.categoria);
+                      setPreco(p.preco);
+                      setEstoque(p.estoque);
+                      setImagem(p.imagem);
 
-                }}>
-                  Editar
-                </a>
+                    }}
+                  >
+                    Editar
+                  </a>
+
+                  {/*APAGAR*/}
+                  <a className="delete" href="" onClick={(e) => {
+                    e.preventDefault()
+                    Deletar(p.id)
+                  }}>Deletar</a>
+
+                </div>
+
 
               </div>
 
@@ -365,5 +378,4 @@ export const ProdutosPages = () => {
       </main>
     </>
   );
-
-};
+}

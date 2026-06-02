@@ -1,7 +1,6 @@
 import "./quemsomospage.css"
-
-export default  function QuemSomosPage() {
+export default function QuemSomosPage() {
     return (
-        <h1>Pagina QuemSomos</h1>
+        <h1>Quem Somos</h1>
     )
 }
