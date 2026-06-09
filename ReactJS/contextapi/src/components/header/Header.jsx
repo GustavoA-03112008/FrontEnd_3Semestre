@@ -1,20 +1,34 @@
-import { Link } from 'react-router-dom'
-import { useContext } from 'react'
-import { UsuarioContext } from '../../context/UsuarioContext'
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UsuarioContext } from "../../context/UsuarioContext";
 
-const  Header = () => {
-    const {usuario} = useContext(UsuarioContext)
-    return(
-        <header>
-            <nav>
-                <Link to={"/"}>Home</Link> {" "}
-                <Link to={"/perfil"}>Perfil</Link>
-                <Link to={"/produto"}>Produto</Link>
-            </nav>
-            <h2>Bem vindo, {usuario}</h2>
-        </header>
+const Header = () => {
+  const { usuario, setUsuario } = useContext(UsuarioContext);
 
-    )
-}
+  const logout = () => {
+    localStorage.removeItem("usuario")
+    setUsuario(null);
+  };
 
-export default Header
+  return (
+    <header>
+      <nav>
+        <Link to={"/"}>Home</Link>{" "}
+        <Link to={"/perfil"}>Perfil</Link>{" "}
+        <Link to={"/produto"}>Produto</Link>{" "}
+        <Link to={"/cadastrarproduto"}>Cadastrar Produto</Link>{" "}
+        <Link to={"/listaproduto"}>Listar Produto</Link>{""}
+      </nav>
+
+      <h2>
+        Bem-vindo, {usuario ? usuario : "Visitante"}
+      </h2>
+
+      <button onClick={logout}>
+        Sair
+      </button>
+    </header>
+  );
+};
+
+export default Header;

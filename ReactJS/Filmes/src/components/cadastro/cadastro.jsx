@@ -34,24 +34,26 @@ const Cadastro = (props) => {
                     >
                         <label htmlFor="genero">Gênero</label>
 
-                        <select
-                            value={props.genero}
-                            onChange={(e) =>
-                                props.setGenero &&
-                                props.setGenero(e.target.value)
-                            }
-                        >
-                            <option value="">Selecione</option>
+                     <select
+                    value={props.genero || ""}
+                    onChange={(e) =>
+                        props.setGenero &&
+                        props.setGenero(e.target.value)
+                    }
+                >
+                    <option value="">
+                        Selecione
+                    </option>
 
-                            {props.listaGeneros?.map((g) => (
-                                <option
-                                    key={g.idGenero}
-                                    value={g.idGenero}
-                                >
-                                    {g.nome}
-                                </option>
-                            ))}
-                        </select>
+                    {props.listaGeneros?.map((g) => (
+                        <option
+                            key={g.idGenero}
+                            value={g.idGenero}
+                        >
+                            {g.nome}
+                        </option>
+                    ))}
+                </select>
                     </div>
 
                     {/* IMAGEM */}

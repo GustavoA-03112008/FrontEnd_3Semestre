@@ -1,17 +1,20 @@
-import "./Botao.css"
+import "./Botao.css";
 
-const Botao = (props) => {
-    return(
+const Botao = ({
+    nomeDoBotao,
+    cancelarEdicao,
+    btnEditar
+}) => {
 
-        <button 
-        className="botao" 
-        type={props.btnEditar ? "button" : "submit"}
-        onClick ={props.cancelarEdicao}
+    return (
+        <button
+            className="botao"
+            type={btnEditar ? "button" : "submit"}
+            onClick={cancelarEdicao}
         >
-        {props.nomeDoBotao}
+            {nomeDoBotao}
         </button>
-
-    )
-}
+    );
+};
 
 export default Botao;

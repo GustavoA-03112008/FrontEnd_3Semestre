@@ -58,75 +58,64 @@ const CadastroGenero = () => {
 
     // Função chamada ao enviar o formulário
     const cadastrarGenero = async (e) => {
+    e.preventDefault();
 
-        // Impede o recarregamento da página
-        e.preventDefault()
+    if (valor.trim().length === 0) {
+        Alerta({
+            title: "Cadastro de Gênero",
+            text: "Gênero deve ser preenchido antes de cadastrar!",
+            icon: "warning",
+            confirmButtonText: "OK"
+        });
 
-        // =========================
-        // VALIDAÇÃO
-        // =========================
+        return;
+    }
 
-        // trim() remove espaços vazios do começo e do fim
-        // verifica se o campo ficou vazio
-        if (valor.trim().length == 0) {
+    const objCadastro = {
+        nome: valor.trim()
+    };
 
-            // Exibe alerta de aviso
-            Alerta({
-                title: "Cadastro de Gênero",
-                text: "Gênero deve ser preenchido antes de cadastrar!!",
-                icon: "warning",
-                confirmButtonText: "OK!"
-            })
+    console.log("Enviando:", objCadastro);
 
-            // Encerra a função
-            return false
-        }
-
-        // Cria o objeto que será enviado para a API
-        const objCadastro = {
-            nome: valor
-        }
-
-        try {
-
-            // Faz requisição POST para cadastrar um gênero
-            const retornoAPI = await api.post("/Genero", objCadastro)
-
-            // Verifica se a API retornou sucesso
-            if (retornoAPI.status == 201) {
-
-                // Exibe mensagem de sucesso
-                Alerta({
-                    title: "Cadastro de Gênero",
-                    text: `Gênero ${objCadastro.nome} cadastrado com sucesso!`,
-                    icon: "success"
-                })
-
-                // Limpa os campos do formulário
-                limparFormulario()
-
-                // Atualiza automaticamente a lista
-                getGeneros()
-
-            } else {
-
-                // Caso a API não retorne sucesso
-                Alerta({
-                    title: "Cadastro de Gênero",
-                    text: `Houve algum problema para cadastrar...`,
-                    icon: "error"
-                })
+    try {
+        const retornoAPI = await api.post(
+            "/Genero",
+            objCadastro,
+            {
+                headers: {
+                    "Content-Type": "application/json"
+                }
             }
+        );
 
-        } catch (error) {
-
-            // Captura erros da API ou conexão
+        if (retornoAPI.status === 201) {
             Alerta({
                 title: "Cadastro de Gênero",
-                text: `Erro na chamada da API...`,
-                icon: "error"
-            })
+                text: `Gênero ${valor} cadastrado com sucesso!`,
+                icon: "success"
+            });
 
+            limparFormulario();
+            getGeneros();
+        }
+
+    } catch (error) {
+
+        console.log("ERRO COMPLETO:", error);
+
+        console.log(
+            "RESPOSTA API:",
+            error.response?.data
+        );
+
+        Alerta({
+            title: "Erro",
+            text:
+                error.response?.data ||
+                "Erro ao cadastrar gênero",
+            icon: "error"
+        });
+        
             // Mostra erro no console
             console.log(error)
         }
