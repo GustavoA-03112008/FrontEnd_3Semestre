@@ -337,29 +337,19 @@ const CadastroGenero = () => {
     // =========================
 
     const getGeneros = async () => {
+    try {
+        const retornoAPI = await api.get("/Genero");
 
-        try {
+        console.log("Gêneros:", retornoAPI.data);
 
-            // Faz GET na API
-            const retornoAPI = await api.get("/Genero")
-
-            // Extrai os dados retornados
-            const dados = retornoAPI.data
-
-            // Salva os dados no state
-            setListaGeneros(dados)
-
-        } catch (error) {
-
-            // Mostra alerta em caso de erro
-            Alerta({
-                title: "Cadastro de Gênero",
-                text: `Erro ao retornar os dados`,
-                icon: "error",
-                confirmButtonText: "OK!"
-            })
-        }
+        setListaGeneros(retornoAPI.data);
     }
+    catch (error) {
+        console.log("Erro completo:", error);
+        console.log("Response:", error.response);
+        console.log("Data:", error.response?.data);
+    }
+}
 
     // =========================
     // JSX (TELA)

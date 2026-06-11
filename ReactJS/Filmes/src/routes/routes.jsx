@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Login from "../pages/login/login";
-import CadastroFilme from "../pages/Cadastrofilme/Cadastrofilme";
+import CadastroFilme from "../pages/Cadastrofilme/CadastroFilme";
 import CadastroGenero from "../pages/CadastroGenero/CadastroGenero";
 
 const Rotas = () => {

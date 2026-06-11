@@ -74,7 +74,9 @@ const CadastroFilme = () => {
 
         formData.append("titulo", valor.trim())
         formData.append("idGenero", idGeneroNumber)
-            formData.append("imagem", imagem)
+     if (imagem) {
+    formData.append("imagem", imagem)
+}
 
         try {
 
